@@ -3,6 +3,7 @@
  */
 package pathgen;
 
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
@@ -11,6 +12,10 @@ public class App {
     public static void main(String[] args) {
         Point[] startPoints;
         Point[] endPoints;
+        var startPoint = new Waypoint(new Point(2, 7), 0, 0, 1);
+        var waypoint1 = new Waypoint(new Point(4.457, 7.234), -88.924, 0.548, 0.897);
+        var endpoint = new Waypoint(new Point(6.646, 6.712), 0, 1, 0);
+        var path = new Path(new Waypoint[] {startPoint, waypoint1, endpoint}, 0, 0);
         // writeToJson(path);
     }
 }
