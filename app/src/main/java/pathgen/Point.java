@@ -16,7 +16,7 @@ public class Point {
         return new Point(Math.cos(radians) * length, Math.sin(radians) * length);
     }
     public String toJsonString () {
-       return String.format("{\"x\": %f, /n \"y\": %f }" , x, y); 
+       return String.format("{\"x\": %f, \"y\": %f }" , x, y); 
         
     }
     double x;

@@ -23,14 +23,41 @@ public class Path {
             else {
                 file.write (","); 
             }
-            file.write ("{ \n" + 
-            "\"anchor\":  \n" +
-            wp.anchor.toJsonString() + 
-            ",\"prevControl\": "); 
+            wp.writeToJson(file);
 
         }
+
+        file.write("]\n");
+        String fileEnd = """
+                ,
+                "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": false
+    }
+                """;
         
-        
+                file.write(fileEnd);
+        file.close();
 
     }
     Waypoint[] waypoints;
