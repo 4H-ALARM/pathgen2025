@@ -9,17 +9,50 @@ public class App {
         return "Hello World!";
     }
 
+    static double startingXCoord = 7.244;
+    static Point[] startingPoints = new Point[] {
+        new Point(startingXCoord, 7),
+        new Point(startingXCoord, 4),
+        new Point(startingXCoord, 1)
+    };
+
+    static Pose2D[] targetReefPoints = new Pose2D[] {
+        new Pose2D(2.75, 4.0, 0),
+        new Pose2D(3.6, 2.5, 60),
+        new Pose2D(5.35, 2.5, 120),
+        new Pose2D(6.25, 4.0, 180),
+        new Pose2D(5.35, 5.5, -120),
+        new Pose2D(3.6, 5.5, -60),
+    };
+
+    static String[] reefPoseNames = new String[] {
+        "AB",
+        "CD",
+        "EF",
+        "GH",
+        "IJ",
+        "KL",
+    };
+
+    static String[] startingPointNames = new String[] {
+        "Left",
+        "Middle",
+        "Right",
+    };
+
     public static void main(String[] args) {
-        Point[] startPoints;
-        Point[] endPoints;
-        var startPoint = new Waypoint(new Point(2, 7), 0, 0, 1);
-        var waypoint1 = new Waypoint(new Point(4.457, 7.234), -88.924, 0.548, 0.897);
-        var endpoint = new Waypoint(new Point(6.646, 6.712), 0, 1, 0);
-        var path = new Path(new Waypoint[] {startPoint, waypoint1, endpoint}, 0, 0);
         try {
-            path.writeToJson("test.json");
-        } catch(Exception e)
-        {
+            for(int i = 0; i < startingPoints.length; ++i) {
+                Point sp = startingPoints[i];
+                for(int j = 0; j < targetReefPoints.length; ++j) {
+                    Pose2D ep = targetReefPoints[j];
+                    Waypoint start = new Waypoint(sp, null, sp.add(Point.fromVector(180, 1)));
+                    Waypoint end = new Waypoint(ep.position, ep.position.add(Point.fromVector(180 + ep.rotation, 1)), null);
+                    Path p = new Path(new Waypoint[]{start, end}, 180, ep.rotation);
+                    p.writeToJson(String.format("%s to Reef %s.path", startingPointNames[i], reefPoseNames[j]));
+                }
+            } 
+        } catch(Exception e) {
             System.out.println(e.toString());
         }
     }

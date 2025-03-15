@@ -44,13 +44,20 @@ public class Path {
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    """;
+    fileEnd = fileEnd + String.format("\"rotation\": %f", rotationEnd);
+    fileEnd = fileEnd +        
+            """
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    """;
+            
+    fileEnd = fileEnd + String.format("\"rotation\": %f", rotationEnd);
+    fileEnd = fileEnd +
+    """       
   },
   "useDefaultConstraints": false
     }
